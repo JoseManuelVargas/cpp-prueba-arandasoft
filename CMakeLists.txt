@@ -11,6 +11,7 @@ add_subdirectory(googletest)
 add_subdirectory(soci)
 
 add_subdirectory(cpuinfo)
+add_subdirectory(fileinfo)
 
 include_directories("${CMAKE_CURRENT_BINARY_DIR}/soci/include")
 
