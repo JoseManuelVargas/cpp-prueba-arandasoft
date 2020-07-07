@@ -49,6 +49,32 @@ make install
 
 ## Instalar GIT
 
+Se require instalar git. En distribuciones linux y en MacOS es sencillo. En windows serecomienda agregar la variable de entorno.
+
+
+# Clonar proyecto
+
+Debido a que el proyecto hace referencia a otros repositorios como submódulos, se debe:
+
+* Clonar, ya sea con git clone o descargando el zip
+
+```
+git clone https://github.com/JoseManuelVargas/cpp-prueba-arandasoft
+```
+
+* Descargar los submódulos.
+
+```
+git submodule init
+git submodule update
+```
+
+* Opcionalmente se puede clonar y actualizar en un solo comando
+
+```
+git clone --recursive-submodules https://github.com/JoseManuelVargas/cpp-prueba-arandasoft
+```
+
 
 # Estructura del proyecto.
 
@@ -80,5 +106,17 @@ cmake -DWITH_BOOST=OFF -DWITH_ORACLE=OFF -DWITH_POSTGRESQL=OFF -DSOCI_TESTS=OFF 
 ```
 cmake --build .
 ```
+
+
+# Inconvenientes
+
+* En windows no consigue ubicar el archivo soci/soci-config.h: Esto se solucionó agregando el directorio de include de soci con la siguiente línea:
+
+```
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/soci/include)
+```
+
+* En windows no ejecuta el código aún después de haber compilado correctamente.
+
 
 

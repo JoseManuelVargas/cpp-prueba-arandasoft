@@ -22,4 +22,7 @@ add_subdirectory(appdb)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
+if(WIN32)
+	include_directories(${CMAKE_CURRENT_BINARY_DIR}/soci/include)
+endif()
 
