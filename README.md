@@ -1,4 +1,4 @@
-# cpp-prueba-arandasoft Prueba para postulación de trabajo en arandasoft
+# Prueba para postulación de trabajo en arandasoft
 Repositorio para desarrollar la prueba de C++
 
 # Pre-requisitos
@@ -49,7 +49,7 @@ make install
 
 ## Instalar GIT
 
-Se require instalar git. En distribuciones linux y en MacOS es sencillo. En windows serecomienda agregar la variable de entorno.
+Se require instalar git. En distribuciones linux y en MacOS es sencillo. En windows se recomienda agregar la variable de entorno.
 
 
 # Clonar proyecto
@@ -89,6 +89,7 @@ El proyecto cuenta con diferentes submódulos, ya sea tomados de otros repositor
 * json: Para manejar los json, necesarios para recibir las tareas. Tomado del [repositorio](https://github.com/nlohmann/json)
 * scheduler: Maneja la agenda para las tareas. Se toma del [repositorio](https://github.com/Bosma/Scheduler) Haciendo cambios en el archivo cmake para convertirlo en una librería. Se usa el [archivo](https://github.com/vit-vit/CTPL/blob/master/ctpl_stl.h)
 * soci: ORM para la base de datos. En este caso se usa SQLite3. Se toma del [repositorio](https://github.com/SOCI/soci)
+* socket: Módulo que crea un servidor socket para recibir las solicitudes de las tareas. **Por desarrollar**.
 
 
 # Compilación
