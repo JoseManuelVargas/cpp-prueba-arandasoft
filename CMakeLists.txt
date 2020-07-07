@@ -10,10 +10,12 @@ enable_testing()
 add_subdirectory(googletest)
 add_subdirectory(soci)
 
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/soci/include)
+
 add_subdirectory(cpuinfo)
 add_subdirectory(fileinfo)
+add_subdirectory(appdb)
 
-include_directories("${CMAKE_CURRENT_BINARY_DIR}/soci/include")
 
 add_executable(${PROJECT_NAME} main.cpp)
 

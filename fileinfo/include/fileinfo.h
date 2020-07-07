@@ -2,14 +2,16 @@
 #define FILEINFO_H
 
 #include <string>
+#include <ctime>
+#include <time.h>
 
 using std::string;
 
 class FileInfo {
         public:
 		string name;
-                string modification;
-		string creation;
+                struct std::tm modification;
+		struct std::tm creation;
                 long size;
 };
 
