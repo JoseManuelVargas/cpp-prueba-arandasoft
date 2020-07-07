@@ -13,6 +13,7 @@ add_subdirectory(soci)
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/soci/include)
 
 add_subdirectory(json)
+add_subdirectory(scheduler)
 
 add_subdirectory(cpuinfo)
 add_subdirectory(fileinfo)
