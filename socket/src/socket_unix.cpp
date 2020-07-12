@@ -8,7 +8,9 @@
 #include <arpa/inet.h>
 
 
-using namespace std;
+using std::cerr;
+using std::string;
+using std::endl;
 
 
 string Socket::readLine() {
