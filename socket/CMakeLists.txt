@@ -4,9 +4,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 project(socket)
 
-# enable_testing()
+enable_testing()
 
-# add_subdirectory(test)
+add_subdirectory(test)
 
 if (WIN32)
 	add_library(${PROJECT_NAME} src/socket_win32.cpp)

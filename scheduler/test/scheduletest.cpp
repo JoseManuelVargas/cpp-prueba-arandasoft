@@ -12,7 +12,7 @@ void message(const std::string &s) {
 }
 
 
-TEST(CPUInfoTest, InformationTest1) {
+TEST(ScheduleTest, SchedulerTest1) {
       	// number of tasks that can run simultaneously  
 	// Note: not the number of tasks that can be added,
 	// but number of tasks that can be run in parallel
