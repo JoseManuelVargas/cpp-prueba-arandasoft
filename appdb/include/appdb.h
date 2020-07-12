@@ -7,8 +7,10 @@
 #include <soci/soci.h>
 #include "cpuinfo.h"
 #include "fileinfo.h"
+#include "taskmodel.h"
 #include <ctime>
 #include <time.h>
+#include <vector>
 
 #define DB_FILE_NAME "db_app.db"
 
@@ -23,13 +25,16 @@ class AppDB {
 		AppDB();
 		void save(CPUInfo & cpu_info);
 		void save(FileInfo & file_info);
+		void save(TaskModel & task_model);
 		void getDBBackUp(ostream & out_stream);
+		void getLastTasks(std::vector<TaskModel> & out_vector, long long from_hour);
 		string getNowDateTimeStr();
 		string convertTmDateTimeToStr(struct std::tm * datetime);
 	private:
 		soci::session sql;
 		void createCPUInfoTable();
 		void createFileInfoTable();
+		void createTaskTable();
 };
 
 

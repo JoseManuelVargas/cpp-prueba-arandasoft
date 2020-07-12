@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "appdb.h"
+#include "taskmodel.h"
 #include <ctime>
 #include <time.h>
 
@@ -33,7 +34,25 @@ TEST(CPUInfoTest, InformationTest1) {
 	db.save(file_info);
 	file_info.name = "other/file.txt";
 	db.save(file_info);
+	TaskModel task;
+	task.task = 2;
+	task.hour = 1594525724;
+	task.detail = "test.txt";
+	db.save(task);
+	task.task = 1;
+	task.hour += 123423;
+	task.detail = "";
+	db.save(task);
 	db.getDBBackUp(std::cout);
+	std::vector<TaskModel> tasksVector;
+	db.getLastTasks(tasksVector, 159);
+	EXPECT_EQ(tasksVector.size(), 2);
+	for (int i = 0; i < tasksVector.size(); i++) {
+		TaskModel & inTask = tasksVector.at(i);
+		EXPECT_GE(inTask.hour, 159);
+		EXPECT_GE(inTask.task, 1);
+		std::cout << i << "-> Task.task " << inTask.task << ". Task.hour " << inTask.hour << ". Task.detail " << inTask.detail << std::endl;
+	}
 	remove(DB_FILE_NAME);
 }
 

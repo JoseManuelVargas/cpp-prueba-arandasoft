@@ -12,7 +12,37 @@ Repositorio para desarrollar la prueba de C++
 * Instalar cmake gcc de acuerdo a la distribución
 
 
+### MacOS
+* Instalar cmake descargando el archivo con formato .dmg desde la página oficial de cmake. Dar doble click una vez de haya descargado. Arrastrar el logo de cmake a Applications. Seguir instrucciones de esta [página](https::/tudat.tudelft.nl/installation/setupDevMacOs.html)
+* Para tener acceso a cmake en la terminal ejecutar el siguiente comando:
+
+```
+sudo mkdir -p /usr/local/bin
+sudo /Applications/Cmake.app/Contents/bin/cmake-gui --install=/usr/local/bin
+```
+
+* Instalar HomeBrew en MacOS por medio del siguiente comando:
+
+```
+/bin/bash -c "$(curl -fsSL https://githubusercontent.com/Homebrew/install/master/install.sh)"
+```
+
+* Confirmar se tenga clang instalado con clang --version. En caso contrario instalar gcc con brew install gcc
+* Confirmar se tenga git instalado git --version. En caso contrario instalar git con brew install git
+
+
 ## Tener instalado sqlite3 de acuerdo al sistema operativo:
+
+
+### MacOS
+* Confirmar seencuentre pre instalado por medio del comando:
+
+```
+sqlite3 --version
+
+```
+En la mayoría de los casos MacOS viene con sqlite3 instalado.
+
 
 ### Windows:
 
@@ -72,7 +102,7 @@ git submodule update
 * Opcionalmente se puede clonar y actualizar en un solo comando
 
 ```
-git clone --recursive-submodules https://github.com/JoseManuelVargas/cpp-prueba-arandasoft
+git clone --recurse-submodules https://github.com/JoseManuelVargas/cpp-prueba-arandasoft.git
 ```
 
 
@@ -82,7 +112,7 @@ git clone --recursive-submodules https://github.com/JoseManuelVargas/cpp-prueba-
 
 El proyecto cuenta con diferentes submódulos, ya sea tomados de otros repositorios o creados. Cada módulo tiene su propio archivo cmake, facilitando la construcción y permitiendo compilación multiplataforma. Cada módulo tiene una carpeta de test que se ejecuta una vez se compila.
 
-* appdb: Este módulo gestiona la escritura y lectura de clases del proyecto a base de datos.
+* appdb: Este módulo gestiona la escritura y lectura de clases del proyecto a base de datos. Se define la clase task para permitir almacenarla en base de datos.
 * cpuinfo: Se encarga de leer la información del computador para los diferentes sistemas operativos. Define las clases para empaquetar la misma.
 * fileinfo: Lee la información de archivos en cada sistema operativo, igualmente define las clases para empaquetar la información.
 * googletest: Para poder hacer test. Se toma del [repositorio](https://github.com/google/googletest)
@@ -90,6 +120,7 @@ El proyecto cuenta con diferentes submódulos, ya sea tomados de otros repositor
 * scheduler: Maneja la agenda para las tareas. Se toma del [repositorio](https://github.com/Bosma/Scheduler) Haciendo cambios en el archivo cmake para convertirlo en una librería. Se usa el [archivo](https://github.com/vit-vit/CTPL/blob/master/ctpl_stl.h)
 * soci: ORM para la base de datos. En este caso se usa SQLite3. Se toma del [repositorio](https://github.com/SOCI/soci)
 * socket: Módulo que crea un servidor socket para recibir las solicitudes de las tareas. **Por desarrollar**.
+* taskmanager: Módulo que une todos los anteriores para crear la aplicación en conjunto.
 
 
 # Compilación
@@ -107,6 +138,19 @@ cmake -DWITH_BOOST=OFF -DWITH_ORACLE=OFF -DWITH_POSTGRESQL=OFF -DSOCI_TESTS=OFF 
 ```
 cmake --build .
 ```
+
+* En adelante, una vez creado el archivo CMakeCache.txt en la carpeta build, solo hace falta correr
+
+```
+ cmake .. 
+```
+
+en caso que se haga algún cambio en las configuraciones cmake seguido de 
+
+```
+cmake --build .
+```
+
 
 
 # Inconvenientes

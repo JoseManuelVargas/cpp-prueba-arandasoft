@@ -2,6 +2,7 @@
 #include <chrono>
 #include <vector>
 #include <ctime>
+#include <string>
 #include "appdb.h"
 
 
@@ -11,6 +12,7 @@ using namespace soci;
 AppDB::AppDB() : sql(*soci::factory_sqlite3(), DB_FILE_NAME) {
 	createCPUInfoTable();
 	createFileInfoTable();
+	createTaskTable();
 }
 
 void AppDB::createCPUInfoTable() {
@@ -40,6 +42,20 @@ void AppDB::createFileInfoTable() {
 	}
 	catch (soci_error const & error) {
 		std::cerr << "Error creating table fileinfo: " << error.what() << std::endl;
+	}
+}
+
+void AppDB::createTaskTable() {
+	try {
+		sql << "create table tasks ("
+			"task integer,"
+			"hour bigint,"
+			"detail varchar(250),"
+			"created_at datetime"
+			");";
+	}
+	catch (soci_error const & error) {
+		std::cerr << "Error creating table task: " << error.what() << std::endl;
 	}
 }
 
@@ -75,10 +91,48 @@ void AppDB::save(FileInfo & file_info) {
 		use(file_info.name, "name");
 }
 
+void AppDB::save(TaskModel & task_model) {
+	sql << "insert into tasks(task, hour, detail, created_at) "
+		"values (:task, :hour, :detail, :create);",
+		use(task_model.task, "task"),
+		use(task_model.hour, "hour"),
+		use(task_model.detail, "detail"),
+		use(getNowDateTimeStr(), "create");
+	std::time_t t = std::time(0);
+	task_model.creation = *(std::localtime(&t));
+}
+		
+void AppDB::getLastTasks(std::vector<TaskModel> & out_vector, long long from_hour) {
+	out_vector.clear();
+	rowset<row> row_set = (sql.prepare << "select * from tasks where hour > " << from_hour);
+	for (rowset<row>::const_iterator it = row_set.begin(); it != row_set.end(); it++) {
+		row const & r = (*it);
+		TaskModel task;
+		for (std::size_t i = 0; i != r.size(); ++i) {
+			const column_properties& props = r.get_properties(i);
+			std::string col_name(props.get_name());
+			if (col_name == "task") {
+				task.task = r.get<int>(i);
+			}
+			else if (col_name == "hour") {
+				task.hour = r.get<long long>(i);
+			}
+			else if (col_name == "detail") {
+				task.detail = r.get<std::string>(i);
+			}
+			else if (col_name == "created_at") {
+				task.creation = r.get<std::tm>(i);
+			}
+		}	
+		out_vector.push_back(task);
+	}
+}
+
 void AppDB::getDBBackUp(ostream & out_stream) {
 	std::vector<string> tables;
 	tables.push_back("cpuinfo");
 	tables.push_back("fileinfo");
+	tables.push_back("tasks");
 	out_stream << "{" << std::endl;
 	for (string table_name : tables) {
 		rowset<row> row_set = (sql.prepare << "select * from " << table_name);
