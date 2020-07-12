@@ -36,31 +36,40 @@ TEST(TaskManagerTest, TMTest1) {
 	sprintf(task_buf, "{\"task\": 1, \"hour\": %lld}", task1.hour + 1);
 	string task_str(task_buf);
 	client.sendLine(task_buf);
-	std::cout << "Answer from server: " << client.readLine() << std::endl;
+	string okAnswer("OK");
+	string answer = client.readLine();
+	EXPECT_EQ(answer, okAnswer);
+	std::cout << "Answer from server: " << answer << std::endl;
 	client.close();
 	
 	client = SocketClient("127.0.0.1", port);
 	sprintf(task_buf, "{\"task\": 2, \"hour\": %lld, \"detail\": \"%s\"}", task1.hour + 1, json_file.c_str());
 	task_str = string(task_buf);
 	client.sendLine(task_str);
-	std::cout << "Answer from server: " << client.readLine() << std::endl;
+	answer = client.readLine();
+	EXPECT_EQ(answer, okAnswer);
+	std::cout << "Answer from server: " << answer << std::endl;
 	client.close();
 	
-	std::this_thread::sleep_for(std::chrono::seconds(1));
+	std::this_thread::sleep_for(std::chrono::seconds(3));
 	
 	client = SocketClient("127.0.0.1", port);
 	sprintf(task_buf, "{\"task\": 3, \"hour\": %lld}", task1.hour + 1);
 	task_str = string(task_buf);
 	client.sendLine(task_str);
-	std::cout << "Answer from server: " << client.readLine() << std::endl;
+	answer = client.readLine();
+	EXPECT_EQ(answer, okAnswer);
+	std::cout << "Answer from server: " << answer << std::endl;
 	std::this_thread::sleep_for(std::chrono::seconds(2));
 	client.close();
+	
 	std::ifstream in_file (json_file);
 	string line;
 	std::cout << "backup file:" << std::endl;
 	while (std::getline(in_file, line)) {
-		std::cout << line;
+		std::cout << line << std::endl;
 	}
+	in_file.close();
 	std::cout << std::endl;
 	std::this_thread::sleep_for(std::chrono::seconds(1));
 	task_man.stop();
