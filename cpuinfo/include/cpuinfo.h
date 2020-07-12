@@ -7,7 +7,7 @@ using std::string;
 
 class CPUInfo {
 	public:
-		long frequency;
+		long long frequency;
 		string name;
 		int cores;
 		long cache_size;
