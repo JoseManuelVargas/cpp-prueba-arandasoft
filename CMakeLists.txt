@@ -27,5 +27,7 @@ add_executable(${PROJECT_NAME} main.cpp)
 
 if(WIN32)
 	include_directories(${CMAKE_CURRENT_BINARY_DIR}/soci/include)
+elseif(APPLE)
+	set(CMAKE_MACOSX_RPATH 1)
 endif()
 
