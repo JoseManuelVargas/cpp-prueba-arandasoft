@@ -29,6 +29,7 @@ void TaskManager__executeBackUpTask(TaskManager * self) {
 
 
 TaskManager::TaskManager(string db_file_name, int port, string output_file) : out_file(output_file), server(port), database(db_file_name), scheduler(24), b_running(true), socket_port(port) {
+	std::cout << "Listening on port " << port << std::endl;
 	reloadTasks();
 }
 
@@ -44,6 +45,7 @@ void TaskManager::reloadTasks() {
 
 
 void TaskManager::run() {
+	std::cout << "Running app." << std::endl << "Waiting for socket connections" << std::endl;
 	while (b_running) {
 		server.acceptSocket();
 		string line = server.readLine();

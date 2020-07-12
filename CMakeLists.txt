@@ -24,7 +24,7 @@ add_subdirectory(taskmanager)
 
 add_executable(${PROJECT_NAME} main.cpp)
 
-# target_link_libraries(${PROJECT_NAME} socket)
+target_link_libraries(${PROJECT_NAME} taskmanager)
 
 if(WIN32)
 	include_directories(${CMAKE_CURRENT_BINARY_DIR}/soci/include)
