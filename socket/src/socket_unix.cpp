@@ -59,7 +59,7 @@ SocketServer::SocketServer(int port) {
 		throw -1;
 	}
 	int opt;
-	if (setsockopt(this_socket, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
+	if (setsockopt(this_socket, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt))) {
 		cerr << "Socket setsockopt failed" << endl;
 		throw -4;
 	}
