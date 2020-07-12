@@ -7,6 +7,10 @@ set(CMAKE_CXX_STANDARD 11)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
 
+enable_testing()
+
+add_subdirectory(test)
+
 add_library(${PROJECT_NAME} INTERFACE)
 target_link_libraries(${PROJECT_NAME} INTERFACE Threads::Threads)
 
