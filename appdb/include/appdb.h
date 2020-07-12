@@ -12,8 +12,6 @@
 #include <time.h>
 #include <vector>
 
-#define DB_FILE_NAME "db_app.db"
-
 
 using namespace soci;
 using std::ostream;
@@ -22,7 +20,7 @@ using std::string;
 
 class AppDB {
         public:
-		AppDB();
+		AppDB(string db_file_name);
 		void save(CPUInfo & cpu_info);
 		void save(FileInfo & file_info);
 		void save(TaskModel & task_model);

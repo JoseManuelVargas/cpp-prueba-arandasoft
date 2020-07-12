@@ -7,9 +7,10 @@
 
 
 using namespace soci;
+using std::string;
 
 
-AppDB::AppDB() : sql(*soci::factory_sqlite3(), DB_FILE_NAME) {
+AppDB::AppDB(string db_file_name) : sql(*soci::factory_sqlite3(), db_file_name) {
 	createCPUInfoTable();
 	createFileInfoTable();
 	createTaskTable();
@@ -167,7 +168,7 @@ void AppDB::getDBBackUp(ostream & out_stream) {
 					out_stream << ", ";
 				}
 			}
-			out_stream << "}" << std::endl;
+			out_stream << "}, " << std::endl;
 		}
 		out_stream << "]," << std::endl;
 	}

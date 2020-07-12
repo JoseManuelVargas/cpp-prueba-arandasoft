@@ -4,11 +4,13 @@
 #include "appdb.h"
 #include "taskmodel.h"
 #include <ctime>
+#include <string>
 #include <time.h>
 
 
 TEST(CPUInfoTest, InformationTest1) {
-	AppDB db;
+	std::string db_file_name("db_test.db");
+	AppDB db(db_file_name);
 	struct std::tm min_dt = {0};
 	min_dt.tm_year = 0;
 	min_dt.tm_mday = 1;
@@ -53,6 +55,6 @@ TEST(CPUInfoTest, InformationTest1) {
 		EXPECT_GE(inTask.task, 1);
 		std::cout << i << "-> Task.task " << inTask.task << ". Task.hour " << inTask.hour << ". Task.detail " << inTask.detail << std::endl;
 	}
-	remove(DB_FILE_NAME);
+	remove(db_file_name.c_str());
 }
 

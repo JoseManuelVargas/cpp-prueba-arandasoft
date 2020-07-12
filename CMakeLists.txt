@@ -19,6 +19,7 @@ add_subdirectory(cpuinfo)
 add_subdirectory(fileinfo)
 add_subdirectory(appdb)
 add_subdirectory(socket)
+add_subdirectory(taskmanager)
 
 
 add_executable(${PROJECT_NAME} main.cpp)

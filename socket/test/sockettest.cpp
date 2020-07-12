@@ -16,10 +16,12 @@ void createServer(const std::string & msg) {
 	server_created = true;
 	std::cout << "Server socket created" << std::endl;
 	server.acceptSocket();
-	server.sendLine(msg);
-	std::cout << ">>>Server:  Se envío " << msg << " desde el server" << std::endl;
-	recvFromClient = server.readLine();	
-	std::cout << ">>>Server:  Se recibio " << recvFromClient << " desde el cliente" << std::endl;
+	for (int i = 0; i < 5; i++) {
+		server.sendLine(msg);
+		std::cout << ">>>Server:  Se envío " << msg << " desde el server" << std::endl;
+		recvFromClient = server.readLine();	
+		std::cout << ">>>Server:  Se recibio " << recvFromClient << " desde el cliente" << std::endl;
+	}
 	server.close();
 }
 
@@ -27,10 +29,12 @@ void createServer(const std::string & msg) {
 void createClient(const std::string & msg) {
 	while (!server_created);
 	SocketClient client("127.0.0.1", PORT_TEST);
-	recvFromServer = client.readLine();
-	std::cout << "<<<Client:  Se recibio " << recvFromServer << " desde el server" << std::endl;
-	client.sendLine(msg);
-	std::cout << "<<<Client:  Se envío " << msg << " desde el cliente" << std::endl;
+	for (int i = 0; i < 5; i++) {
+		recvFromServer = client.readLine();
+		std::cout << "<<<Client:  Se recibio " << recvFromServer << " desde el server" << std::endl;
+		client.sendLine(msg);
+		std::cout << "<<<Client:  Se envío " << msg << " desde el cliente" << std::endl;
+	}
 	client.close();
 }
 
