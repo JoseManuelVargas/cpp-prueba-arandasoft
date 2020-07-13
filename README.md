@@ -119,7 +119,7 @@ El proyecto cuenta con diferentes submódulos, ya sea tomados de otros repositor
 * json: Para manejar los json, necesarios para recibir las tareas. Tomado del [repositorio](https://github.com/nlohmann/json)
 * scheduler: Maneja la agenda para las tareas. Se toma del [repositorio](https://github.com/Bosma/Scheduler) Haciendo cambios en el archivo cmake para convertirlo en una librería. Se usa el [archivo](https://github.com/vit-vit/CTPL/blob/master/ctpl_stl.h)
 * soci: ORM para la base de datos. En este caso se usa SQLite3. Se toma del [repositorio](https://github.com/SOCI/soci)
-* socket: Módulo que crea un servidor socket para recibir las solicitudes de las tareas. **Por desarrollar**.
+* socket: Módulo que crea un servidor socket para recibir las solicitudes de las tareas.
 * taskmanager: Módulo que une todos los anteriores para crear la aplicación en conjunto.
 
 
@@ -161,7 +161,7 @@ cmake --build .
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/soci/include)
 ```
 
-* En windows no ejecuta el código aún después de haber compilado correctamente.
+* En windows no ejecuta el código aún después de haber compilado correctamente. Se probaron diferentes versiones de Visual Studio. Problemas con soci y sqlite3.
 
 
 
