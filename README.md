@@ -64,7 +64,7 @@ tar xvfz sqlite-autoconf-xxx.tar.gz
 cd sqlite-autoconf-xxx
 ```
 
-* Configurar la construcción. El prefijo se puede cambiar, pero se debe tener en cuenta [patrón de búsqueda de SOCI](https://github.com/SOCI/soci/blob/master/cmake/modules/FindSQLite3.cmake)
+* Configurar la compilación. El prefijo se puede cambiar, pero se debe tener en cuenta [patrón de búsqueda de SOCI](https://github.com/SOCI/soci/blob/master/cmake/modules/FindSQLite3.cmake)
 
 ```
 ./configure --prefix=/usr/local
@@ -110,7 +110,7 @@ git clone --recurse-submodules https://github.com/JoseManuelVargas/cpp-prueba-ar
 
 ## Módulos
 
-El proyecto cuenta con diferentes submódulos, ya sea tomados de otros repositorios o creados. Cada módulo tiene su propio archivo cmake, facilitando la construcción y permitiendo compilación multiplataforma. Cada módulo tiene una carpeta de test que se ejecuta una vez se compila.
+El proyecto cuenta con diferentes submódulos, ya sea tomados de otros repositorios o creados. Cada módulo tiene su propio archivo cmake, facilitando la compilación y permitiendo compilación multiplataforma. Cada módulo tiene una carpeta de test que se ejecuta una vez se compila.
 
 * appdb: Este módulo gestiona la escritura y lectura de clases del proyecto a base de datos. Se define la clase task para permitir almacenarla en base de datos.
 * cpuinfo: Se encarga de leer la información del computador para los diferentes sistemas operativos. Define las clases para empaquetar la misma.
